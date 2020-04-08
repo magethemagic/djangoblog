@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    用户注册
+{% endblock %}
+{% block body_content %}
+    <div class="bg-white">
+        <div class="container">
+            <div class="row justify-content-center align-items-center d-flex vh-100">
+                <div class="col-md-4 mx-auto">
+                    <div class="osahan-login py-4">
+                        <div class="text-center mb-4">
+                            <a href="{% url 'index' %}"><img alt="" src={% static 'img/favicon.ico' %}></a>
+                            <h5 class="font-weight-bold mt-3">注册</h5>
+                            <p class="text-muted">进入WePost 记录你的美好生活</p>
+                            <p>{{ msg }}</p>
+                        </div>
+                        <form action="{% url 'user:register' %}" method="post">{% csrf_token %}
+                            <div class="form-group">
+                                <label class="mb-1">用户名</label>
+                                <div class="position-relative icon-form-control">
+                                    <i class="feather-user position-absolute"></i>
+                                    <input type="text" name="username" class="form-control" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1">电话</label>
+                                <div class="position-relative icon-form-control">
+                                    <i class="feather-phone position-absolute"></i>
+                                    <input type="tel" name="phone_number" class="form-control" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1">邮箱</label>
+                                <div class="position-relative icon-form-control">
+                                    <i class="feather-at-sign position-absolute"></i>
+                                    <input type="email" name="email" class="form-control" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1">密码(6位以上英文数字和特殊字符)</label>
+                                <div class="position-relative icon-form-control">
+                                    <i class="feather-unlock position-absolute"></i>
+                                    <input type="password" name="password" class="form-control" id="password-1" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1">确认密码</label>
+                                <div class="position-relative icon-form-control">
+                                    <i class="feather-unlock position-absolute"></i>
+                                    <input type="password" name="password" class="form-control" id="password-2" required="">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="mb-1">我同意 <a href="#">用户守则</a>, <a href="#">隐私政策</a>和 <a href="#">Cookie
+                                    政策</a>.</label>
+                            </div>
+                            <input class="btn btn-primary btn-block text-uppercase" type="submit"> 同意并继续</input>
+                            <div class="py-3 d-flex align-item-center">
+                                <a href="forgot-password.html">忘记密码？</a>
+                                <span class="ml-auto"> 已有账号？ <a class="font-weight-bold" href="{% url 'user:login' %}">登录</a></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block myjs %}
+    <script>
+        window.onload = function () {
+            document.getElementById("password-1").onchange = checkPwd;
+            document.getElementById("password-2").onchange = validatePassword;
+        };
+        function checkPwd() {
+            let pw1 = document.getElementById("password-1").value;
+            let reg = /^(?![a-zA-z]+$)(?!\d+$)(?![!@#$%^&*]+$)[a-zA-Z\d!@#$%^&*]+$/;
+            if (!reg.test(pw1)) {
+                document.getElementById("password-1").setCustomValidity("密码不合法(6-18位字母、数字、特殊符号)");
+                return false;
+            } else {
+                document.getElementById("password-1").setCustomValidity("");
+            }
+        }
+        function validatePassword() {
+            let pw1 = document.getElementById("password-1").value;
+            let pw2 = document.getElementById("password-2").value;
+            if (pw1 !== pw2) {
+                document.getElementById("password-2").setCustomValidity("两次结果输入不一致");
+            } else {
+                document.getElementById("password-2").setCustomValidity("");
+            }
+        }</script>
+{% endblock %}

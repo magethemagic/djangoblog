@@ -1,0 +1,94 @@
+{% load static %}
+{% for article in articles %}
+        <div class="box mb-3 shadow-sm border rounded bg-white osahan-post">
+            <div class="p-3 d-flex align-items-center border-bottom osahan-post-header">
+                <div class="dropdown-list-image mr-3">
+                    <img alt="" class="rounded-circle" src={{ article.author.user_avatar }}>
+                    <div class="status-indicator bg-success"></div>
+                </div>
+                <div class="font-weight-bold">
+                    <div class="text-truncate">{{ article.author.username }}</div>
+                    <div class="small text-gray-500">{{ article.author.phone_number }}</div>
+                </div>
+                <span class="ml-auto small">{{article.created_date}}</span>
+            </div>
+            <div class="p-3 border-bottom osahan-post-body">
+                <p>{{ article.content }}<a href="#">{% for tag in article.tags.all %}
+                #{{ tag.name }}#
+                {% endfor %}
+                </a></p>
+                {% if article.image %}
+                    <img class="img-fluid" alt="Responsive image" src="{{ article.image }}">
+                {% endif %}
+            </div>
+            <div id="{{ article.id }}" class="p-3 border-bottom osahan-post-footer">
+                <a href="#{{ article.id }}" class="mr-3 text-secondary"><i
+                        class="feather-heart text-danger"></i>{{ article.liked_num }}
+                </a>
+                <a href="#dialog{{ article.id }}" data-toggle="modal" data-target="#dialog{{ article.id }}"
+                 class="mr-3 text-secondary"><i
+                        class="feather-message-square"></i>{{ article.visited_num }}
+                </a>
+                <a href="#dialog{{ article.id }}" class=" mr-3 text-secondary"><i class="feather-share-2"></i>2</a>
+            </div>
+
+        </div>
+
+        <div class="modal fade " id="dialog{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content d-flex box mb-3 shadow-sm border rounded osahan-post">
+                    <div class="box mb-3 shadow-sm border rounded bg-white osahan-post">
+                        <div class="p-3 d-flex align-items-center border-bottom osahan-post-header">
+                            <div class="dropdown-list-image mr-3">
+                                <img alt="" class="rounded-circle" src={{ article.author.user_avatar }}>
+                                <div class="status-indicator bg-success"></div>
+                            </div>
+                            <div class="font-weight-bold">
+                                <div class="text-truncate">{{ article.author.username }}</div>
+                                <div class="small text-gray-500">{{ article.author.phone_number }}</div>
+                            </div>
+                            <span class="ml-auto small">3 hours</span>
+                        </div>
+                        <div class="p-3 border-bottom osahan-post-body">
+                            <p>{{ article.content }}<a href="#">{{ article.tags_list }}</a></p>
+                            {% if article.image %}
+                    <img class="img-fluid" alt="Responsive image" src="{{ article.image }}">
+                {% endif %}
+                        </div>
+
+                        <div id="comment-area{{ article.id }}"
+                             class="p-3   border-bottom osahan-post-comment">
+                            <div class="dropdown-list-image mr-3">
+                                <img class="rounded-circle" alt="" src={% static 'img/p7.png' %}>
+                                <div class="status-indicator bg-success"></div>
+                            </div>
+                            <div class="font-weight-bold">
+                                <div class="text-truncate"> James Spiegel <span class="float-right small">2 min</span>
+                                </div>
+                                <div class="small text-gray-500">Ratione voluptatem sequi en lod nesciunt. Neque porro
+                                    quisquam
+                                    est,
+                                    quinder dolorem ipsum quia dolor sit amet, consectetur
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-3">
+                <div class="p-3 w-100">
+                    <textarea placeholder="你的想法..." class="form-control border-0 p-0 shadow-none"
+                              rows="2"></textarea>
+                </div>
+                <div class="border-top p-3 d-flex align-items-center">
+                    <div class="mr-auto"></div>
+                    <div class="flex-shrink-1">
+                        <button type="button" class="btn btn-primary btn-sm"> &emsp;评论&emsp;</button>
+                    </div>
+                </div>
+            </div>
+
+                    </div>
+                    <!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+    {% endfor %}

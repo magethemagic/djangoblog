@@ -1,0 +1,233 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body_content %}
+    <nav class="navbar navbar-expand navbar-dark bg-dark osahan-nav-top p-0">
+        <div class="container">
+            <!--图标和搜索框//TODO-->
+            <a class="navbar-brand mr-2" href="{% url 'index' %}"><img style="width:38px;height: 38px;" alt=""
+                                                                src={% static 'img/logo1.png' %}>
+            </a>
+            <form class="d-none d-sm-inline-block form-inline mr-auto my-2 my-md-0 mw-100 navbar-search">
+                <div class="input-group">
+                    <input type="text" class="form-control shadow-none border-0" placeholder="搜索博客"
+                           aria-label="Search" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                        <button class="btn" type="button">
+                            <i class="feather-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <!--顶部状态栏//TODO-->
+            <ul class="navbar-nav ml-auto d-flex align-items-center">
+                <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                <li class="nav-item dropdown no-arrow d-sm-none">
+                    <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="feather-search mr-2"></i>
+                    </a>
+                    <!-- Dropdown - Messages -->
+                    <div class="dropdown-menu dropdown-menu-right p-3 shadow-sm animated--grow-in"
+                         aria-labelledby="searchDropdown">
+                        <form class="form-inline mr-auto w-100 navbar-search">
+                            <div class="input-group">
+                                <input type="text" class="form-control border-0 shadow-none"
+                                       placeholder="Search blog..." aria-label="Search" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <button class="btn" type="button">
+                                        <i class="feather-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="jobs.html"><i class="feather-user mr-2"></i><span
+                            class="d-none d-lg-inline">个人中心</span></a>
+                </li>
+                <li class="nav-item dropdown mr-2">
+                    <a class="nav-link dropdown-toggle pr-0" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="feather-file-text mr-2"></i><span class="d-none d-lg-inline">Pages</span>
+                    </a>
+                    <!-- Dropdown - User Information -->
+                    <div class="dropdown-menu dropdown-menu-right shadow-sm">
+                        <a class="dropdown-item" href="jobs.html"><i class="feather-briefcase mr-1"></i> Jobs</a>
+                        <a class="dropdown-item" href="profile.html"><i class="feather-user mr-1"></i> Profile</a>
+                        <a class="dropdown-item" href="connection.html"><i class="feather-users mr-1"></i>
+                            Connection</a>
+                        <a class="dropdown-item" href="company-profile.html"><i class="feather-user-plus mr-1"></i>
+                            Company Profile</a>
+                        <a class="dropdown-item" href="job-profile.html"><i class="feather-globe mr-1"></i> Job Profile</a>
+                        <a class="dropdown-item" href="user/sign-in.html"><i class="feather-log-in mr-1"></i> Sign
+                            In</a>
+                        <a class="dropdown-item" href="user/sign-up.html"><i class="feather-lock mr-1"></i> Sign Up</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="feather-message-square"></i>
+                        <!-- Counter - Alerts -->
+                        <span class="badge badge-danger badge-counter">8</span>
+                    </a>
+                    <!-- Dropdown - Alerts -->
+                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow-sm">
+                        <h6 class="dropdown-header">
+                            Message Center
+                        </h6>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="dropdown-list-image mr-3">
+                                <img alt="" class="rounded-circle" src={% static 'img/p1.png' %}>
+                                <div class="status-indicator bg-success"></div>
+                            </div>
+                            <div class="font-weight-bold overflow-hidden">
+                                <div class="text-truncate">Hi there! I am wondering if you can help me with a problem
+                                    I've been having.
+                                </div>
+                                <div class="small text-gray-500">Emily Fowler · 58m</div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="dropdown-list-image mr-3">
+                                <img alt="" class="rounded-circle" src={% static 'img/p2.png' %}>
+                                <div class="status-indicator"></div>
+                            </div>
+                            <div class="overflow-hidden">
+                                <div class="text-truncate">I have the photos that you ordered last month, how would you
+                                    like them sent to you?
+                                </div>
+                                <div class="small text-gray-500">Jae Chun · 1d</div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="dropdown-list-image mr-3">
+                                <img class="rounded-circle" src={% static 'img/p3.png' %} alt="">
+                                <div class="status-indicator bg-warning"></div>
+                            </div>
+                            <div class="overflow-hidden">
+                                <div class="text-truncate">Last month's report looks great, I am very happy with the
+                                    progress so far, keep up the good work!
+                                </div>
+                                <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="dropdown-list-image mr-3">
+                                <img class="rounded-circle" src={% static 'img/p4.png' %} alt="">
+                                <div class="status-indicator bg-success"></div>
+                            </div>
+                            <div class="overflow-hidden">
+                                <div class="text-truncate">Am I a good boy? The reason I ask is because someone told me
+                                    that people say this to all dogs, even if they aren't good...
+                                </div>
+                                <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                            </div>
+                        </a>
+                        <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        <i class="feather-bell"></i>
+                        <!-- Counter - Alerts -->
+                        <span class="badge badge-info badge-counter">6</span>
+                    </a>
+                    <!-- Dropdown - Alerts -->
+                    <div class="dropdown-list dropdown-menu dropdown-menu-right shadow-sm">
+                        <h6 class="dropdown-header">
+                            Alerts Center
+                        </h6>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-primary">
+                                    <i class="feather-download-cloud text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">December 12, 2019</div>
+                                <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                            </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-success">
+                                    <i class="feather-edit text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">December 7, 2019</div>
+                                $290.29 has been deposited into your account!
+                            </div>
+                        </a>
+                        <a class="dropdown-item d-flex align-items-center" href="#">
+                            <div class="mr-3">
+                                <div class="icon-circle bg-warning">
+                                    <i class="feather-folder text-white"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="small text-gray-500">December 2, 2019</div>
+                                Spending Alert: We've noticed unusually high spending for your account.
+                            </div>
+                        </a>
+                        <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
+                    </div>
+                </li>
+                <!-- Nav Item - User Information -->
+                {% if request.session.username %}
+                    <li class="nav-item dropdown no-arrow ml-1 osahan-profile-dropdown">
+                        <a class="nav-link dropdown-toggle pr-0" href="#" role="button" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
+                            <img class="img-profile rounded-circle" src="https://danbooru.donmai.us/data/__original_drawn_by_kuroi_liar_player__2008844c97e06f63037267367d206e97.jpg">
+                        </a>
+                        <!-- Dropdown - User Information -->
+
+                        <div class="dropdown-menu dropdown-menu-right shadow-sm">
+                            <div class="p-3 d-flex align-items-center">
+                                <div class="dropdown-list-image mr-3">
+                                    <img alt="" class="rounded-circle" src="https://danbooru.donmai.us/data/__original_drawn_by_kuroi_liar_player__2008844c97e06f63037267367d206e97.jpg">
+                                    <div class="status-indicator bg-success"></div>
+                                </div>
+                                <div class="font-weight-bold">
+                                    <div class="text-truncate">{{ request.session.username }}</div>
+                                    <div class="small text-gray-500">User</div>
+                                </div>
+                            </div>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{% url 'user:center' %}"><i class="feather-user mr-1"></i> 个人信息</a>
+                            <a class="dropdown-item" href="{% url 'user:logout' %}"><i class="feather-log-out mr-1"></i>登出</a>
+                        </div>
+                    </li>
+                {% else %}
+                    <a href="{% url 'user:login' %}">
+                        <button class="btn btn-primary btn-block text-uppercase" >登录</button>
+                    </a>
+                {% endif %}
+
+            </ul>
+        </div>
+    </nav>
+
+    <div class="py-4">
+        <div class="container">
+            <div class="row">
+                <!-- Main Content -->
+                <main class="col col-xl-8 order-xl-2 col-lg-12 order-lg-1 col-md-12 col-sm-12 col-12">
+                    {% block main_content %}
+
+                    {% endblock %}
+                </main>
+                <!--左边栏//TODO-->
+                <aside class="col col-xl-3 order-xl-1 col-lg-6 order-lg-2 col-md-6 col-sm-6 col-12">
+                    {% block aside_content %}
+
+                    {% endblock %}
+                </aside>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

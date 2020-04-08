@@ -1,0 +1,115 @@
+{% extends 'base_index.html' %}
+{% load static %}
+{% block title %}
+    首页
+{% endblock %}
+{% block main_content %}
+    <div class="box shadow-sm border rounded bg-white mb-3 osahan-share-post">
+        <ul class="nav nav-justified border-bottom osahan-line-tab" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
+                   aria-controls="contact" aria-selected="false"><i class="feather-clipboard"></i> 发布微博</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                   aria-controls="profile" aria-selected="false"><i class="feather-image"></i>上传图片</a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane show active" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                <div class="p-3 w-100">
+                    <textarea placeholder="你的想法..." class="form-control border-0 p-0 shadow-none"
+                              rows="4"
+                                id="post_content"></textarea>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                <div class="p-3 w-100 text-center">
+                    <!--//TODO 改成上传图片-->
+                    <a href="">
+                        <input type="file" accept="images/*" class=" form-control  shadow-none border-0 p-0">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="border-top p-3 d-flex align-items-center">
+            <div class="mr-auto"><a href="#" class="text-link small"><i class="feather-tag"></i> 添加tag</a>
+            </div>
+            <div class="flex-shrink-1">
+                <button type="button" {% if not request.session.username %}disabled{% endif %}
+                        class="btn btn-primary btn-sm"
+                        id="post_btn"
+                >&emsp;发布&emsp;
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!--
+        博客区//TODO
+    -->
+    {% include 'post_item.html' %}
+
+{% endblock %}
+{% block aside_content %}
+    {% if request.session.username %}
+        <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
+            <div class="py-4 px-3 border-bottom">
+                <img class="img-fluid mt-2 rounded-circle" alt="Responsive image"
+                     src="{{ request.session.user_avatar }}">
+                <h5 class="font-weight-bold text-dark mb-1 mt-4">{{ request.session.username }}</h5>
+                <p class="mb-0 text-muted">User</p>
+            </div>
+            <div class="box p-3 border-bottom">
+                <p>{{ request.session.desc }}</p>
+            </div>
+            <div class="d-flex">
+                <div class="col-6 border-right p-3">
+                    <h6 class="font-weight-bold text-dark mb-1">{% if request.session.fanscount %}
+                        {{ request.session.blogcount }}
+                    {% else %}0{% endif %} </h6>
+                    <p class="mb-0 text-black-50 small">粉丝数</p>
+                </div>
+                <div class="col-6 p-3">
+                    <h6 class="font-weight-bold text-dark mb-1">{{ articles.count }} </h6>
+                    <p class="mb-0 text-black-50 small">微博数</p>
+                </div>
+            </div>
+            <!--  -->
+            <div class="overflow-hidden border-top">
+                <a class="font-weight-bold p-3 d-block" href="profile.html">个人中心</a>
+            </div>
+        </div>
+    {% else %}
+        <div class="box mb-3 shadow-sm border rounded bg-white profile-box text-center">
+            <div class="py-4 px-3 border-bottom">
+                <h5 class="font-weight-bold text-dark mb-1 mt-4">请先登录</h5>
+            </div>
+            <div class="overflow-hidden border-top">
+                <a class="font-weight-bold p-3 d-block" href="{% url 'user:login' %}">登录</a>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block myjs %}
+    <script>
+    window.onload = function () {
+        document.getElementById('post_btn').onclick = postData;
+    };
+        function postData() {
+            let content = document.getElementById('post_content').value;
+            let tags = content.match(/#.*?#/g);
+            let tag_arr = [];
+            for(i=0;i<tags.length;i++){
+                tag_arr[i] =tags[i].replace(/#/g,"");
+            }
+            tags = JSON.stringify(tag_arr);
+            let username = "{{  request.session.username }}";
+            axios.get("{% url 'article:post' %}",{params:{author:username,content:content,tags:tags}}).then(response=>{
+                if(response.data.status === 1) self.location="{% url 'index' %}";
+            })
+        }
+    </script>
+{% endblock %}

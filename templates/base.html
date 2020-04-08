@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="{% static 'img/favicon.ico' %}">
+    <title>{% block title %}
+        首页
+    {% endblock %}</title>
+    <!-- Slick Slider -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/slick/slick.min.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'vendor/slick/slick-theme.min.css' %}"/>
+    <!-- Feather Icon-->
+    <link href="{% static 'vendor/icons/feather.css' %} " rel="stylesheet" type="text/css">
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+    {% block mycss %}
+
+    {% endblock %}
+</head>
+<body>
+    <!--顶部状态栏-->
+    {% block body_content %}
+
+    {% endblock %}
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- slick Slider JS-->
+    <script type="text/javascript" src="{% static 'vendor/slick/slick.min.js' %}"></script>
+    <!-- Custom scripts for all pages-->
+    <!--<script src="{% static 'js/osahan.js' %}"></script>-->
+    <script src="{% static 'js/drag_element.js' %}"></script>
+    <script src="{% static 'vendor/vue/vue.min.js' %}"></script>
+    <script src="{% static 'vendor/axios/axios.min.js' %}"></script>
+    {% block myjs %}
+
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    用户登录
+{% endblock %}
+{% block body_content %}
+    <div class="bg-white">
+         <div class="container">
+            <div class="row justify-content-center align-items-center d-flex vh-100">
+               <div class="col-md-4 mx-auto">
+                  <div class="osahan-login py-4">
+                     <div class="text-center mb-4">
+                        <a href="{% url 'index' %}"><img alt="" src="{% static 'img/favicon.ico' %}" ></a>
+                        <h5 class="font-weight-bold mt-3">欢迎回来</h5>
+                        <p class="text-muted">期待与你一起分享美丽的世界</p>
+                         <p class="text-danger ">{{ msg }}{{ errors }}</p>
+                     </div>
+                     <form action="{% url 'user:login' %}" method="post" >{% csrf_token %}
+                        <div class="form-group">
+                           <label class="mb-1">用户名</label>
+                           <div class="position-relative icon-form-control">
+                              <i class="feather-user position-absolute"></i>
+                              <input type="text" name="username" class="form-control" required="">
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="mb-1">密码</label>
+                           <div class="position-relative icon-form-control">
+                              <i class="feather-unlock position-absolute"></i>
+                              <input type="password" name="password" class="form-control" required="">
+                           </div>
+                        </div>
+                        <div class="custom-control custom-checkbox mb-3">
+                           <input type="checkbox" class="custom-control-input" id="customCheck1">
+                           <label class="custom-control-label" for="customCheck1">记住密码</label>
+                        </div>
+                         <button class="btn btn-primary btn-block text-uppercase" type="submit" name="login">登录</button>
+
+                        <div class="py-3 d-flex align-item-center">
+                           <a href="{% url 'user:retrieve' %}">忘记密码？</a>
+                           <span class="ml-auto"> 还没有账号？ <a class="font-weight-bold" href="{% url 'user:register' %}">注册</a></span>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+{% endblock %}
